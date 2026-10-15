@@ -1,7 +1,8 @@
----
+version: '3.8'
+
 services:
   db:
-    image: shaikmustafa/arshad:db
+    image: gopi4e4/pyapp:db_image
     deploy:
       replicas: 1
     ports:
@@ -10,7 +11,7 @@ services:
       - mynetwork
 
   auth_service:
-    image: shaikmustafa/arshad:auth
+    image: gopi4e4/pyapp:auth_image
     deploy:
       replicas: 1
     ports:
@@ -19,10 +20,9 @@ services:
       - mynetwork
     depends_on:
       - db
-    
 
   book_service:
-    image: shaikmustafa/arshad:book
+    image: gopi4e4/pyapp:book_image
     deploy:
       replicas: 1
     ports:
@@ -31,8 +31,9 @@ services:
       - mynetwork
     depends_on:
       - db
+
   borrow_service:
-    image: shaikmustafa/arshad:borrow
+    image: gopi4e4/pyapp:borrow_image
     deploy:
       replicas: 1
     ports:
@@ -43,7 +44,7 @@ services:
       - db
 
   frontend:
-    image: shaikmustafa/arshad:frontend
+    image: gopi4e4/pyapp:frontend
     deploy:
       replicas: 1
     ports:
@@ -57,4 +58,4 @@ services:
 
 networks:
   mynetwork:
-    driver: bridge
+    driver: overlay
